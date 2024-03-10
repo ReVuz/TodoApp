@@ -3,6 +3,7 @@ import { useState } from 'react';
 
 function Input({ setToDos, toDos }) {
     const [toDo, setToDo] = useState('')
+
     return (
         <div className='flex justify-center p-5'>
             <form className="w-full max-w-sm">
