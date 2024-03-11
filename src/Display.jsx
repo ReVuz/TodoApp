@@ -12,7 +12,7 @@ function Display({ setToDos, toDos }) {
     return (
         <div className="todos">
             {toDos.map((obj) => {
-                const todoClassName = `todo flex items-center justify-between border border-gray-200 rounded ${obj.id % 2 === 0 ? 'border-emerald-500' : 'border-sky-400'} ${obj.status ? 'line-through ' : ''
+                const todoClassName = `todo flex items-center justify-between border rounded ${obj.id % 2 === 0 ? 'border-emerald-500' : 'border-sky-400'} ${obj.status ? 'line-through ' : ''
                     }`;
 
                 return (
@@ -34,7 +34,7 @@ function Display({ setToDos, toDos }) {
                         </div>
                         <div className="right flex">
                             <span className="text-sm text-gray-500 mx-4">{new Date(obj.id).toLocaleString()}</span>
-                            <FaRegTrashCan className='text-xl hover:bg-red-95 hover:text-red-600 hover:animate-pulse' onClick={() => removeTodo(obj.id)} />
+                            <FaRegTrashCan className='text-xl hover:bg-red-95 hover:text-red-600 rounded-md border-spacing-1' onClick={() => removeTodo(obj.id)} />
                         </div>
                     </div>
                 )
