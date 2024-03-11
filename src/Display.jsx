@@ -1,6 +1,5 @@
 import React from 'react'
-import { MdOutlineDeleteOutline } from "react-icons/md";
-
+import { FaRegTrashCan } from "react-icons/fa6";// import { FiEdit } from "react-icons/fi";
 
 function Display({ setToDos, toDos }) {
     const removeTodo = (id) => {
@@ -34,7 +33,8 @@ function Display({ setToDos, toDos }) {
                             <label htmlFor="bordered-checkbox-1" className="text-lg font-medium text-gray-900 p-4">{obj.text}</label>
                         </div>
                         <div className="right flex">
-                            <MdOutlineDeleteOutline className='text-2xl' onClick={() => removeTodo(obj.id)} />
+                            <span className="text-sm text-gray-500 mx-4">{new Date(obj.id).toLocaleString()}</span>
+                            <FaRegTrashCan className='text-xl hover:bg-red-95 hover:text-red-600 ' onClick={() => removeTodo(obj.id)} />
                         </div>
                     </div>
                 )
