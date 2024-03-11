@@ -994,6 +994,16 @@ video {
   animation: spin 1s linear infinite;
 }
 
+.group:hover .group-hover\:from-emerald-400 {
+  --tw-gradient-from: #34d399 var(--tw-gradient-from-position);
+  --tw-gradient-to: rgb(52 211 153 / 0) var(--tw-gradient-to-position);
+  --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);
+}
+
+.group:hover .group-hover\:to-sky-500 {
+  --tw-gradient-to: #0ea5e9 var(--tw-gradient-to-position);
+}
+
 @media (min-width: 768px) {
   .md\:text-5xl {
     font-size: 3rem;
