@@ -8,7 +8,7 @@ function Input({ setToDos, toDos }) {
         if (toDo.trim() === '') {
             return;
         }
-        setToDos([...toDos, { id: Date.now(), text: toDo, status: false }]);
+        setToDos([...toDos, { id: Date.now(), text: toDo, status: false, isEditing: false }]);
         setToDo('');
     };
 
