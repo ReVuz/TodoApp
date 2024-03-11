@@ -34,7 +34,7 @@ function Display({ setToDos, toDos }) {
                         </div>
                         <div className="right flex">
                             <span className="text-sm text-gray-500 mx-4">{new Date(obj.id).toLocaleString()}</span>
-                            <FaRegTrashCan className='text-xl hover:bg-red-95 hover:text-red-600 ' onClick={() => removeTodo(obj.id)} />
+                            <FaRegTrashCan className='text-xl hover:bg-red-95 hover:text-red-600 hover:animate-pulse' onClick={() => removeTodo(obj.id)} />
                         </div>
                     </div>
                 )
