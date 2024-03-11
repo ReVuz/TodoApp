@@ -17,7 +17,7 @@ function Edit({ setToDos, toDos, todoToEdit }) {
 
         if (todoToEdit) {
             // Update existing task
-            setToDos(toDos.map((obj) => (obj.id === todoToEdit.id ? { ...obj, text: toDo, isEditing: false } : obj)));
+            setToDos(toDos.map((obj) => (obj.id === todoToEdit.id ? { ...obj, text: toDo, isEditing: false, id: Date.now() } : obj)));
             setToDo('');
         } else {
             // Add new task
