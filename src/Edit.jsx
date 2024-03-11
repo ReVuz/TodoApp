@@ -6,7 +6,7 @@ function Edit({ setToDos, toDos, todoToEdit }) {
 
     useEffect(() => {
         if (todoToEdit) {
-            <div className='appearance-none bg-transparent border-none w-full text-gray-700 mr-3 py-1 px-2 leading-tight focus:outline-none'>{setToDo(todoToEdit.text)}</div>
+            setToDo(todoToEdit.text)
         }
     }, [todoToEdit]);
 
