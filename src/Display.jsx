@@ -41,7 +41,7 @@ function Display({ setToDos, toDos }) {
                         </div>)}
                         {obj.isEditing && <Edit setToDos={setToDos} toDos={toDos} todoToEdit={obj} />}
                         < div className="right flex">
-                            <span className="text-sm text-gray-500 mx-4">{new Date().toLocaleString()}</span>
+                            <span className="text-sm text-gray-500 mx-4">{new Date(obj.id).toLocaleString()}</span>
                             <FiEdit className='text-xl hover:bg-red-95 hover:text-indigo-600 rounded-md border-spacing-1 mx-1' onClick={() => editTask(obj.id)} />
                             <FaRegTrashCan className='text-xl hover:bg-red-95 hover:text-red-600 rounded-md border-spacing-1' onClick={() => removeTodo(obj.id)} />
                         </div>
