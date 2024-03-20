@@ -4,13 +4,16 @@ import { useState } from 'react';
 function Input({ setToDos, toDos }) {
     const [toDo, setToDo] = useState('')
 
-    const handleAdd = () => {
+    const handleAdd = async () => {
         if (toDo.trim() === '') {
             return;
         }
+        // If successful, add the todo item to the local state
         setToDos([...toDos, { id: Date.now(), text: toDo, status: false, isEditing: false }]);
+        // Clear the input field
         setToDo('');
-    };
+    }
+
 
     return (
         <div className='flex justify-center p-5'>

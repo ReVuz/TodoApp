@@ -5,6 +5,7 @@ import Display from './Display';
 function App() {
   const [toDos, setToDos] = useState([])
 
+
   return (
     <div className=" min-h-screen bg-gradient-to-r to-emerald-600 from-sky-400 p-5">
       <div className="group rounded mx-auto max-w-[750px] min-h-[630px] bg-white hover:neon-teal ">
