@@ -3,26 +3,16 @@ import { FaRegTrashCan } from "react-icons/fa6";
 import { FiEdit } from "react-icons/fi";
 import Edit from './Edit';
 import { useEffect } from 'react';
+import { fetchData } from './fetchData';
 import { supabase } from './lib/helper/supabaseClient';
 
 function Display({ setToDos, toDos }) {
 
+    // const [isLoading, setIsLoading] = useState(true);
+
     useEffect(() => {
-        const fetchData = async () => {
-            try {
-                const { data } = await supabase
-                    .from('Todo_list')
-                    .select('*');
-                setToDos(data);
-                console.log(data); // Log fetched data
-            } catch (error) {
-                console.error('Error fetching data:', error);
-            }
-        };
-
-        fetchData();
+        fetchData(setToDos);
     }, [setToDos]);
-
 
     const removeTodo = (id) => {
         console.log(id);
@@ -33,11 +23,17 @@ function Display({ setToDos, toDos }) {
     const editTask = (id) => {
         setToDos(toDos.map(obj => obj.id === id ? { ...obj, isEditing: !obj.isEditing } : obj))
     }
+    // if (isLoading) {
+    //     return <div>Loading...</div>;
+    // }
+    // else {
+
+
 
 
     return (
         <div className="todos w-full h-auto max-w-full">
-            {toDos.map((obj) => {
+            {toDos && toDos.length > 0 ? (toDos.map((obj) => {
                 const todoClassName = `todo flex items-center justify-between border rounded ${obj.id % 2 === 0 ? 'border-emerald-500' : 'border-sky-400'} ${obj.status ? 'line-through ' : ''
                     }`;
 
@@ -66,9 +62,12 @@ function Display({ setToDos, toDos }) {
                         </div>
                     </div>
                 )
-            })}
+            })) : (
+                <div>Loading...</div>
+            )}
         </div >
     )
 }
+// }
 
 export default Display
