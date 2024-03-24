@@ -1,12 +1,15 @@
 import React from 'react'
 import { useState, useEffect } from 'react';
+// import fetchData from './fetchData';
 
 function Edit({ setToDos, toDos, todoToEdit }) {
     const [toDo, setToDo] = useState('')
 
     useEffect(() => {
-        if (todoToEdit) {
-            setToDo(todoToEdit.text)
+        if (todoToEdit && todoToEdit.Todo !== undefined) {
+            setToDo(todoToEdit.Todo); // Update toDo only when todoToEdit is defined and has a text property
+        } else {
+            setToDo(''); // Set toDo to an empty string if todoToEdit is undefined or doesn't have a text property
         }
     }, [todoToEdit]);
 
@@ -41,3 +44,4 @@ function Edit({ setToDos, toDos, todoToEdit }) {
 }
 
 export default Edit
+

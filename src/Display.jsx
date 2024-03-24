@@ -3,37 +3,26 @@ import { FaRegTrashCan } from "react-icons/fa6";
 import { FiEdit } from "react-icons/fi";
 import Edit from './Edit';
 import { useEffect } from 'react';
-import { fetchData } from './fetchData';
-import { supabase } from './lib/helper/supabaseClient';
+import fetchData from './fetchData';
 
 function Display({ setToDos, toDos }) {
-
-    // const [isLoading, setIsLoading] = useState(true);
-
     useEffect(() => {
         fetchData(setToDos);
-    }, [setToDos]);
+    }, [setToDos])
 
     const removeTodo = (id) => {
         console.log(id);
-        const newTodos = toDos.filter((obj) => obj.id !== id);
+        const newTodos = toDos.filter((obj) => obj.id !== id); // Keep only todos with different IDs
         setToDos(newTodos);
     };
 
     const editTask = (id) => {
         setToDos(toDos.map(obj => obj.id === id ? { ...obj, isEditing: !obj.isEditing } : obj))
     }
-    // if (isLoading) {
-    //     return <div>Loading...</div>;
-    // }
-    // else {
-
-
-
 
     return (
-        <div className="todos w-full h-auto max-w-full">
-            {toDos && toDos.length > 0 ? (toDos.map((obj) => {
+        <div className="todos">
+            {toDos.map((obj) => {
                 const todoClassName = `todo flex items-center justify-between border rounded ${obj.id % 2 === 0 ? 'border-emerald-500' : 'border-sky-400'} ${obj.status ? 'line-through ' : ''
                     }`;
 
@@ -51,7 +40,7 @@ function Display({ setToDos, toDos }) {
                                     // console.log(obj)
                                     return obj2
                                 }))
-                            }} value={obj.status} type="checkbox" className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
+                            }} value={obj.status} type="checkbox" className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" onClick={() => { }} />
                             <label htmlFor="bordered-checkbox-1" className="text-lg font-medium text-gray-900 p-4">{obj.Todo}</label>
                         </div>)}
                         {obj.isEditing && <Edit setToDos={setToDos} toDos={toDos} todoToEdit={obj} />}
@@ -62,12 +51,9 @@ function Display({ setToDos, toDos }) {
                         </div>
                     </div>
                 )
-            })) : (
-                <div>Loading...</div>
-            )}
+            })}
         </div >
     )
 }
-// }
 
 export default Display

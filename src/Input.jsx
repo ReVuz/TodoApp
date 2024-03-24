@@ -1,34 +1,16 @@
 import React from 'react'
-import { useEffect, useState } from 'react';
-import { supabase } from './lib/helper/supabaseClient';
-import fetchData from './fetchData';
+import { useState } from 'react';
 
 function Input({ setToDos, toDos }) {
     const [toDo, setToDo] = useState('')
-
 
     const handleAdd = () => {
         if (toDo.trim() === '') {
             return;
         }
-        addToDo(toDo);
+        setToDos([...toDos, { id: Date.now(), text: toDo, status: false, isEditing: false }]);
         setToDo('');
-    }
-
-    const addToDo = async (newTodo) => {
-        try {
-            const { data } = await supabase.from('Todo_list').insert({ Todo: newTodo });
-            fetchData(setToDos);
-            setToDos(data);
-        }
-        catch (error) {
-            console.error('Error adding Todo : ', error);
-        }
     };
-    useEffect(() => {
-
-    }, [setToDos]);
-
 
     return (
         <div className='flex justify-center p-5'>
