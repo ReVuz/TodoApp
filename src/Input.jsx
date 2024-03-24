@@ -1,5 +1,7 @@
 import React from 'react'
 import { useState } from 'react';
+import { supabase } from './lib/helper/supabaseClient';
+import fetchData from './fetchData';
 
 function Input({ setToDos, toDos }) {
     const [toDo, setToDo] = useState('')
@@ -8,9 +10,20 @@ function Input({ setToDos, toDos }) {
         if (toDo.trim() === '') {
             return;
         }
-        setToDos([...toDos, { id: Date.now(), text: toDo, status: false, isEditing: false }]);
+        addTodo()
         setToDo('');
+        fetchData(setToDos)
     };
+
+    async function addTodo() {
+        await supabase
+            .from('Todo_list')
+            .insert([
+                { Todo: toDo },
+            ])
+            .select()
+
+    }
 
     return (
         <div className='flex justify-center p-5'>
