@@ -4,6 +4,7 @@ import { FiEdit } from "react-icons/fi";
 import Edit from './Edit';
 import { useEffect } from 'react';
 import fetchData from './fetchData';
+import { supabase } from './lib/helper/supabaseClient';
 
 function Display({ setToDos, toDos }) {
     useEffect(() => {
@@ -14,10 +15,19 @@ function Display({ setToDos, toDos }) {
         console.log(id);
         const newTodos = toDos.filter((obj) => obj.id !== id); // Keep only todos with different IDs
         setToDos(newTodos);
+        delTodo(id)
     };
 
     const editTask = (id) => {
         setToDos(toDos.map(obj => obj.id === id ? { ...obj, isEditing: !obj.isEditing } : obj))
+    }
+
+    async function delTodo(id) {
+        await supabase
+            .from('Todo_list')
+            .delete()
+            .eq('id', id)
+
     }
 
     return (
