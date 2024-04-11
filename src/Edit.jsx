@@ -25,9 +25,10 @@ function Edit({ setToDos, toDos, todoToEdit }) {
             setToDo('');
             editTodo(todoToEdit)
             fetchData(setToDos);
+
         } else {
             // Add new task
-            setToDos([...toDos, { id: Date.now(), text: toDo, status: false, isEditing: false }]);
+            // setToDos([...toDos, { id: Date.now(), text: toDo, status: false, isEditing: false }]);
             setToDo('');
         }
 
@@ -63,4 +64,3 @@ function Edit({ setToDos, toDos, todoToEdit }) {
 }
 
 export default Edit
-

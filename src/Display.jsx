@@ -2,13 +2,20 @@ import React from 'react'
 import { FaRegTrashCan } from "react-icons/fa6";
 import { FiEdit } from "react-icons/fi";
 import Edit from './Edit';
-import { useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import fetchData from './fetchData';
 import { supabase } from './lib/helper/supabaseClient';
+import ClockLoader from 'react-spinners/ClockLoader'
 
 function Display({ setToDos, toDos }) {
+
+    const [loading, setLoading] = useState(false)
     useEffect(() => {
+        setLoading(true)
         fetchData(setToDos);
+        setTimeout(() => {
+            setLoading(false)
+        }, 300)
     }, [setToDos])
 
     const removeTodo = (id) => {
@@ -32,8 +39,13 @@ function Display({ setToDos, toDos }) {
 
     return (
         <div className="todos">
+            {loading && (
+                <div className='absolute inset-0 flex items-center justify-center right-10'>
+                    <ClockLoader color={"#36d7b7"} loading={loading} size={50} />
+                </div>
+            )}
             {toDos.map((obj) => {
-                const todoClassName = `todo flex items-center justify-between border rounded ${obj.id % 2 === 0 ? 'border-emerald-500' : 'border-sky-400'} ${obj.status ? 'line-through ' : ''
+                const todoClassName = `todo flex items-center justify-between border rounded ${obj.id % 2 === 0 ? 'border-emerald-500' : 'border-sky-400'} ${obj.checked ? 'line-through ' : ''
                     }`;
 
                 return (
@@ -41,16 +53,22 @@ function Display({ setToDos, toDos }) {
                         {!obj.isEditing && (<div className="p-5 left">
                             <input onChange={(e) => {
                                 // console.log(e.target.value)
-                                console.log(obj)
                                 setToDos(toDos.filter(obj2 => {
                                     if (obj2.id === obj.id) {
-                                        obj2.status = e.target.checked
+                                        obj2.checked = e.target.checked
+                                        console.log(obj)
                                     }
                                     // console.log(e.target.value)
                                     // console.log(obj)
                                     return obj2
                                 }))
-                            }} value={obj.status} type="checkbox" className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" onClick={() => { }} />
+                            }} checked={obj.checked} type="checkbox" className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" onClick={async () => {
+                                await supabase
+                                    .from('Todo_list')
+                                    .update({ checked: !obj.checked })
+                                    .eq('id', obj.id)
+                                    .select();
+                            }} />
                             <label htmlFor="bordered-checkbox-1" className="text-lg font-medium text-gray-900 p-4">{obj.Todo}</label>
                         </div>)}
                         {obj.isEditing && <Edit setToDos={setToDos} toDos={toDos} todoToEdit={obj} />}

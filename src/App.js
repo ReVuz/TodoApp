@@ -1,6 +1,7 @@
-import { useState } from 'react';
 import Input from './Input';
 import Display from './Display';
+import { useState } from 'react';
+
 
 function App() {
   const [toDos, setToDos] = useState([])
@@ -22,7 +23,8 @@ function App() {
         })} */}
       </div>
     </div>
+
   );
 }
 
-export default App;
+export default App;
