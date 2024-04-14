@@ -1,8 +1,10 @@
 /** @type {import('tailwindcss').Config} */
 import plugin from 'tailwindcss/plugin';
 export const content = ["./src/**/*.{html,js,jsx}"];
+export const darkMode = ["class"];
 export const theme = {
   extend: {},
+  
 };
 export const plugins = [
   plugin(({ theme, addUtilities }) => {

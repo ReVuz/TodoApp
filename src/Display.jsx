@@ -69,13 +69,13 @@ function Display({ setToDos, toDos }) {
                                     .eq('id', obj.id)
                                     .select();
                             }} />
-                            <label htmlFor="bordered-checkbox-1" className="text-lg font-medium text-gray-900 p-4">{obj.Todo}</label>
+                            <label htmlFor="bordered-checkbox-1" className="text-lg font-medium text-gray-900 p-4 dark:text-white">{obj.Todo}</label>
                         </div>)}
                         {obj.isEditing && <Edit setToDos={setToDos} toDos={toDos} todoToEdit={obj} />}
                         < div className="right flex">
                             <span className="text-sm text-gray-500 mx-4">{new Date(obj.created_at).toLocaleString()}</span>
-                            <FiEdit className='text-xl hover:bg-red-95 hover:text-indigo-600 rounded-md border-spacing-1 mx-1' onClick={() => editTask(obj.id)} />
-                            <FaRegTrashCan className='text-xl hover:bg-red-95 hover:text-red-600 rounded-md border-spacing-1' onClick={() => removeTodo(obj.id)} />
+                            <FiEdit className='text-xl hover:bg-red-95 hover:text-indigo-600 rounded-md border-spacing-1 mx-1 dark:text-slate-400' onClick={() => editTask(obj.id)} />
+                            <FaRegTrashCan className='text-xl hover:bg-red-95 hover:text-red-600 rounded-md border-spacing-1 dark:text-slate-400' onClick={() => removeTodo(obj.id)} />
                         </div>
                     </div>
                 )
