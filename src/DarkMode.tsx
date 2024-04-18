@@ -3,20 +3,21 @@ import { DarkModeSwitch } from 'react-toggle-dark-mode';
 
 interface DarkModeProps {
   onChange: (checked: boolean) => void;
+  theme :  string;
 }
 
-const DarkMode: React.FC<DarkModeProps> = ({ onChange }) => {
-  const [isDarkMode, setDarkMode] = React.useState(false);
-
+const DarkMode: React.FC<DarkModeProps> = ({theme, onChange }) => {
+  // const [isDarkMode, setDarkMode] = React.useState(false);
+  
   const toggleDarkMode = (checked: boolean) => {
-    setDarkMode(checked);
+    // setDarkMode(checked);
     onChange(checked); // Call the onChange prop function with the checked value
   };
 
   return (
     <DarkModeSwitch
       style={{ marginBottom: '2rem' }}
-      checked={isDarkMode}
+      checked={theme === "dark"}
       onChange={toggleDarkMode}
       size={30}
     />
